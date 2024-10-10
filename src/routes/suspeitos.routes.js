@@ -18,8 +18,9 @@ suspeitosRoutes.get("/", (req, res) => {
     .send( suspeitos ) 
 })
 
+
+// Rota para cadastrar um suspeito
 suspeitosRoutes.post("/", (req, res) => {
-    // Validação dos campos de nome e profissão
 
     const{ nome, profissão, envolvimentoApostas, nivelSuspeita } = req.body
         const novoSuspeito = {
@@ -30,12 +31,21 @@ suspeitosRoutes.post("/", (req, res) => {
         nivelSuspeita: nivelSuspeita,
     }
 
-    if (!nome || !profissão) {
+    // Validação dos campos de nome e profissão
+    if (!nome || !profissão || !envolvimentoApostas || !nivelSuspeita) {
         return res.status(400).send({
-            message: 'O Nome ou o Profissão não foi preenchido'
+            message: 'Algum dos campos não foi preenchido'
         })
     }
 
+    // Validação do campo de envolvimento de aposta
+    if(envolvimentoApostas != 'sim' && envolvimentoApostas != 'não') {
+        return res.status(400)({
+            message: 'Envolvimento de Apostas não esclarecido'
+        })
+    }
+
+    // Validação do campo de nivel de suspeita
     if(nivelSuspeita != 'baixo'  && nivelSuspeita != 'médio' && nivelSuspeita != 'alto') {
         return res.status(400).send({
             message: 'Nível de suspeita não especificado'
@@ -85,17 +95,26 @@ suspeitosRoutes.put('/:id', (req, res) => {
     suspeito.nivelSuspeita = nivelSuspeita;
 
 
-        if (!nome || !profissão) {
-            return res.status(400).send({
-                message: 'O Nome ou o Profissão não foi preenchido'
-            })
-        }
-    
-        if(nivelSuspeita != 'baixo'  && nivelSuspeita != 'médio' && nivelSuspeita != 'alto') {
-            return res.status(400).send({
-                message: 'Nível de Suspeita não Especificado'
-            })
-        }
+    // Validação dos campos de nome e profissão
+    if (!nome || !profissão || !envolvimentoApostas || !nivelSuspeita) {
+        return res.status(400).send({
+            message: 'Algum dos campos não foi preenchido'
+        })
+    }
+
+    // Validação do campo de envolvimento de aposta
+    if(envolvimentoApostas != 'sim' && envolvimentoApostas != 'não') {
+        return res.status(400)({
+            message: 'Envolvimento de Apostas não esclarecido'
+        })
+    }
+
+    // Validação do campo de nivel de suspeita
+    if(nivelSuspeita != 'baixo'  && nivelSuspeita != 'médio' && nivelSuspeita != 'alto') {
+        return res.status(400).send({
+            message: 'Nível de suspeita não especificado'
+        })
+    }
 
         else {
             return res.status(201).send({
@@ -108,6 +127,7 @@ suspeitosRoutes.put('/:id', (req, res) => {
 
 })
 
+// Rota para deleter por id
 suspeitosRoutes.delete('/:id', (req, res) => {
     const { id } = req.params;
 
