@@ -41,3 +41,21 @@ suspeitosRoutes.post("/", (req, res) => {
         .json( novoSuspeito )
 
     })
+
+// Rota para buscar um suspeito pelo id
+suspeitosRoutes.get("/:id", (req, res) => {
+    const {id} = req.params;
+    // console.log(id)
+    const suspeito = suspeitos.find((suspect) => suspect.id == id)
+
+    if(!suspeito) {
+        return res.status(404).send({
+            message: "Suspeito não Encontrado!"
+        });
+    }
+
+    return res.status(200).send({
+        message: "Suspeito Encontrado!",
+        suspeito,
+    });
+})
