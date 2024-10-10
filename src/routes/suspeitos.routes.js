@@ -31,8 +31,8 @@ suspeitosRoutes.post("/", (req, res) => {
         nivelSuspeita: nivelSuspeita,
     }
 
-    // Validação dos campos de nome e profissão
-    if (!nome || !profissão) {
+    // Validação dos campos 
+    if (!nome || !profissão || !envolvimentoApostas || !nivelSuspeita) {
         return res.status(400).send({
             message: 'Algum dos campos não foi preenchido'
         })
@@ -88,8 +88,8 @@ suspeitosRoutes.put('/:id', (req, res) => {
     suspeito.nivelSuspeita = nivelSuspeita;
 
 
-    // Validação dos campos de nome e profissão
-    if (!nome || !profissão) {
+    // Validação dos campos 
+    if (!nome || !profissão || !envolvimentoApostas || !nivelSuspeita) {
         return res.status(400).send({
             message: 'Algum dos campos não foi preenchido'
         })
