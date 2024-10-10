@@ -1,0 +1,18 @@
+{
+  "name": "atividade-bets",
+  "version": "1.0.0",
+  "description": "Atividade de Bets 2TDS2",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "Bets",
+    "Back",
+    "End",
+    "Felipe",
+    "Dev"
+  ],
+  "author": "Vitor Argeri",
+  "license": "MIT"
+}
