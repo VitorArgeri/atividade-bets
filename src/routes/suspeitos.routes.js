@@ -63,7 +63,7 @@ suspeitosRoutes.get("/:id", (req, res) => {
 suspeitosRoutes.put('/:id', (req, res) => {
     const { id } = req.params;
 
-    const suspeito = suspeitos.find((candidate) => candidate.id == id)
+    const suspeito = suspeitos.find((suspect) => suspect.id == id)
 
     if(!suspeito) {
         return res.status(404).send({
@@ -89,6 +89,26 @@ suspeitosRoutes.put('/:id', (req, res) => {
             })
         }
 
-        
+
 
 })
+
+suspeitosRoutes.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    const suspeito = suspeitos.find((suspect) => suspect.id == id)
+
+    if(!suspeito) {
+        return res.status(404).send({
+            message: "Suspeito não Encontrado!"
+        });
+    }
+
+    suspeitos = suspeitos.filter((suspect) => suspect.id != id)
+
+    return res.status(200).send({
+        message: 'Suspeito Deletado!',
+    })
+})
+
+export default suspeitosRoutes
