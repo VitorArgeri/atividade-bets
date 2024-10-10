@@ -59,3 +59,36 @@ suspeitosRoutes.get("/:id", (req, res) => {
         suspeito,
     });
 })
+
+suspeitosRoutes.put('/:id', (req, res) => {
+    const { id } = req.params;
+
+    const suspeito = suspeitos.find((candidate) => candidate.id == id)
+
+    if(!suspeito) {
+        return res.status(404).send({
+            message: 'Suspeito não Encontrado!'
+        });
+    }
+
+    const{ nome, profissão, envolvimentoApostas, nivelSuspeita } = req.body
+        suspeito.nome = nome;
+        suspeito.profissão = profissão;
+        suspeito.envolvimentoApostas = envolvimentoApostas;
+        suspeito.nivelSuspeita = nivelSuspeita;
+
+        if (!nome || !profissão) {
+            return res.status(400).send({
+                message: 'O Nome ou o Profissão não foi preenchido'
+            })
+        }
+    
+        if(nivelSuspeita != 'baixo'  || nivelSuspeita != 'médio' || nivelSuspeita != 'alto') {
+            return res.status(400).send({
+                message: 'Nível de Suspeita não Especificado'
+            })
+        }
+
+        
+
+})
