@@ -32,16 +32,9 @@ suspeitosRoutes.post("/", (req, res) => {
     }
 
     // Validação dos campos de nome e profissão
-    if (!nome || !profissão || !envolvimentoApostas || !nivelSuspeita) {
+    if (!nome || !profissão) {
         return res.status(400).send({
             message: 'Algum dos campos não foi preenchido'
-        })
-    }
-
-    // Validação do campo de envolvimento de aposta
-    if(envolvimentoApostas != 'sim' && envolvimentoApostas != 'não') {
-        return res.status(400)({
-            message: 'Envolvimento de Apostas não esclarecido'
         })
     }
 
@@ -96,16 +89,9 @@ suspeitosRoutes.put('/:id', (req, res) => {
 
 
     // Validação dos campos de nome e profissão
-    if (!nome || !profissão || !envolvimentoApostas || !nivelSuspeita) {
+    if (!nome || !profissão) {
         return res.status(400).send({
             message: 'Algum dos campos não foi preenchido'
-        })
-    }
-
-    // Validação do campo de envolvimento de aposta
-    if(envolvimentoApostas != 'sim' && envolvimentoApostas != 'não') {
-        return res.status(400)({
-            message: 'Envolvimento de Apostas não esclarecido'
         })
     }
 
@@ -121,10 +107,6 @@ suspeitosRoutes.put('/:id', (req, res) => {
                 message: 'Candidato Atualizado!'
             })
         }
-
-        
-
-
 })
 
 // Rota para deleter por id
