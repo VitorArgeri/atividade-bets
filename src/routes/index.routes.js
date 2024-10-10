@@ -1,5 +1,5 @@
 import { Router } from "express";
-import candidatosRoutes from "./candidatos.routes.js";
+import suspeitosRoutes from "./suspeitos.routes.js";
 
 const routes = Router();
 
@@ -9,6 +9,6 @@ routes.get("/", (req, res) => {
     })
 })
 
-routes.use('/candidatos', candidatosRoutes);
+routes.use('/suspeitos', suspeitosRoutes);
 
 export default routes

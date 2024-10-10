@@ -3,7 +3,13 @@ import { Router } from "express"
 const suspeitosRoutes = Router()
 
 let suspeitos = [
-    
+    {
+        id: Math.floor(Math.random() * 1000000),
+        nome: 'Lucas Paqueta',
+        profissão: 'Jogador de Futebol',
+        envolvimentoApostas: 'sim',
+        nivelSuspeita: 'alto'
+    }
 ]
 
 // Rota para buscar todos os suspeitos
@@ -30,7 +36,7 @@ suspeitosRoutes.post("/", (req, res) => {
         })
     }
 
-    if(nivelSuspeita != 'baixo'  || nivelSuspeita != 'médio' || nivelSuspeita != 'alto') {
+    if(nivelSuspeita != 'baixo'  && nivelSuspeita != 'médio' && nivelSuspeita != 'alto') {
         return res.status(400).send({
             message: 'Nível de suspeita não especificado'
         })
@@ -60,8 +66,9 @@ suspeitosRoutes.get("/:id", (req, res) => {
     });
 })
 
+// Rota para atualizar por id
 suspeitosRoutes.put('/:id', (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params;    
 
     const suspeito = suspeitos.find((suspect) => suspect.id == id)
 
@@ -72,10 +79,11 @@ suspeitosRoutes.put('/:id', (req, res) => {
     }
 
     const{ nome, profissão, envolvimentoApostas, nivelSuspeita } = req.body
-        suspeito.nome = nome;
-        suspeito.profissão = profissão;
-        suspeito.envolvimentoApostas = envolvimentoApostas;
-        suspeito.nivelSuspeita = nivelSuspeita;
+    suspeito.nome = nome;
+    suspeito.profissão = profissão;
+    suspeito.envolvimentoApostas = envolvimentoApostas;
+    suspeito.nivelSuspeita = nivelSuspeita;
+
 
         if (!nome || !profissão) {
             return res.status(400).send({
@@ -83,12 +91,19 @@ suspeitosRoutes.put('/:id', (req, res) => {
             })
         }
     
-        if(nivelSuspeita != 'baixo'  || nivelSuspeita != 'médio' || nivelSuspeita != 'alto') {
+        if(nivelSuspeita != 'baixo'  && nivelSuspeita != 'médio' && nivelSuspeita != 'alto') {
             return res.status(400).send({
                 message: 'Nível de Suspeita não Especificado'
             })
         }
 
+        else {
+            return res.status(201).send({
+                message: 'Candidato Atualizado!'
+            })
+        }
+
+        
 
 
 })
